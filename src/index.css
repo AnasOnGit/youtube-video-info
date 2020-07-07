@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.navbar-brand span
+{
+	color: #de3030;
+	font-weight: bold;
+	font-size: 34px;
+}
+.navbar-brand
+{
+	font-size: 34px;
+	color:#000;
+}
+
+.tags
+{
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+    padding: 7px;
+}
+.fancy-tags 
+{
+	margin-top: 5px;
+}
+
+.fancy-tags span{
+	border-radius: 3px;
+    background: #de3030;
+    color: #fff;
+    margin: 2px;
+    width: 100%;
+    padding: 0 5px 0px 3px;
+
+}
