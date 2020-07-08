@@ -1,8 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Kulim Park', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,6 +8,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.navbar
+{
+	/*justify-content: center;*/
 }
 .navbar-brand span
 {
@@ -21,6 +23,7 @@ code {
 {
 	font-size: 34px;
 	color:#000;
+	font-weight: bold;
 }
 
 .tags
@@ -43,4 +46,52 @@ code {
     width: 100%;
     padding: 0 5px 0px 3px;
 
+}
+
+.channel-info a
+{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #a092a0;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px #cac8c8;
+    text-decoration: none;
+    cursor: pointer;
+    color:#000;
+}
+.channel-info a:hover
+{
+	color:blue;
+}
+
+.channel-info img
+{
+	border-radius: 50px;
+    box-shadow: -1px 2px 4px #807373;
+}
+
+.channel-info span h3
+{
+	margin-left:7px;
+}
+
+.channel-info span span
+{
+	margin-left:7px;
+	color:#929292;
+}
+
+.description
+{
+	min-height: 90vh;
+}
+
+.loading{
+	text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
 }
