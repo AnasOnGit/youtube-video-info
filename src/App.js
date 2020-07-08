@@ -21,6 +21,14 @@ function App() {
   const [channelId,setChannelId] = useState("")
   const [loading,setLoading] = useState(false)
   // methods
+  const checkResponse = (response) => {
+  	console.log(response)
+  	if(response.ok === 403 || !response.ok)
+      	{
+      		throw Error("Youtube server is not responding, Please try again later!!!")
+      	}
+      	return response;
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     // remove any waring message if their is one..
@@ -32,7 +40,10 @@ function App() {
 	  // remove any waring message if their is one..
 	  setMessage({});
       const watchQuery = urlArray[3];
-      // console.log(watchQuery.split("watch"))
+      if(watchQuery == undefined)
+      {
+      	setMessage({message:"Please enter a valid link!!!"});
+      }else
       if(watchQuery.split("watch")[0] === "")
       {
       	// remove message
@@ -64,16 +75,12 @@ function App() {
     fetch(
       `https://www.googleapis.com/youtube/v3/videos?key=${api}&part=snippet&id=${videoId}`
     )
-      .then((response) => response.json())
+      .then(checkResponse)
+      .then((response) => {
+      	response.json()
+      })
       .then((data) => {
       	console.log(data)
-        if(data.error.code)
-        {
-        	 // hide loading
-	      	setLoading(false)
-	      	// set error message
-        	setMessage({message:'Youtube server not responding,Please try again later.',color:"red"})
-        }else{
         const videoInfo = data.items[0].snippet;
         setTitle(videoInfo.title);
         setDescription(videoInfo.description);
@@ -95,8 +102,15 @@ function App() {
 
       });
         getStatistics(videoInfo.channelId);
-        }
-      });
+        
+      })
+       .catch(err=>{
+       	console.log(err)
+         // hide loading
+	     setLoading(false)
+	     // set error message
+        setMessage({message:`${err}`,color:"red"})
+      })
   };
   const getChannelInfo = (channelId) => {
   	 fetch(
@@ -165,7 +179,7 @@ function App() {
       <form className="mt-4" onSubmit={handleSubmit}>
   		{showMessage}
         <div className="form-group">
-          <label>Video Url</label>
+          <label>YouTube Video Link</label>
           <input
             type="url"
             placeholder="Video Url Here"
