@@ -48,7 +48,7 @@ code {
 
 }
 
-.channel-info a
+.box-container,.channel-info a
 {
 	display: flex;
     flex-direction: row;
@@ -60,6 +60,11 @@ code {
     text-decoration: none;
     cursor: pointer;
     color:#000;
+}
+.box-container
+{
+	margin-top:24px;
+	font-size: 15px;
 }
 .channel-info a:hover
 {
@@ -94,4 +99,17 @@ code {
     display: flex;
     justify-content: center;
     margin-top: 15px;
+}
+.promotion
+{
+	margin: 12px 0px;
+}
+.promotion a
+{
+	text-decoration: none;
+}
+
+.container
+{
+	padding-bottom: 54px;
 }

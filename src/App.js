@@ -3,7 +3,7 @@ import VideoInfo from "./components/VideoInfo";
 
 function App() {
   // define
-  const api = "AIzaSyA_dElXTtCT54ue5JuYJJ-W0g6tAHZg9t0";
+  const api = process.env.REACT_APP_API_KEY;
   let showMessage;
   let showVideoInfo;
   let showLoading = (<span className="loading">Loading</span>);
@@ -23,8 +23,9 @@ function App() {
   // methods
   const checkResponse = (response) => {
   	console.log(response)
-  	if(response.ok === 403 || !response.ok)
+  	if(!response.ok)
       	{
+      		// response.ok === 403 || 
       		throw Error("Youtube server is not responding, Please try again later!!!")
       	}
       	return response;
@@ -64,6 +65,7 @@ function App() {
     	// remove any waring message if their is one..
 	    setMessage({});
 	 	const videoId =  urlArray[3];
+	 	console.log(videoId)
 	 	getVideoInfo(videoId);
     }
      else {
@@ -75,12 +77,19 @@ function App() {
     fetch(
       `https://www.googleapis.com/youtube/v3/videos?key=${api}&part=snippet&id=${videoId}`
     )
-      .then(checkResponse)
+      // .then(checkResponse)
       .then((response) => {
-      	response.json()
+      	if(!response.ok)
+      	{
+      		// response.ok === 403 || 
+      		throw Error("Youtube server is not responding, Please try again later!!!")
+      	}
+      	return response.json();
+  // }
+      	// response.json()
       })
       .then((data) => {
-      	console.log(data)
+      	// console.log(data)
         const videoInfo = data.items[0].snippet;
         setTitle(videoInfo.title);
         setDescription(videoInfo.description);
@@ -98,7 +107,7 @@ function App() {
         const channelInfo = data.items[0].snippet;
         setChannelName(channelInfo.title)
         setIcon(channelInfo.thumbnails.default.url)
-        console.log(channelInfo)
+        // console.log(channelInfo)
 
       });
         getStatistics(videoInfo.channelId);
@@ -194,6 +203,12 @@ function App() {
       </form>
       {loading?showLoading:""}
      {title === "" ? "":<VideoInfo title={title} src={src} description={description} tags={tags} icon={icon} subscriber={subscriber} channelName={channelName} channelId={channelId} />}
+    <span className="box-container">
+    	Hey, I'm YVI I can extract Youtube video title, tags, description, and thumbnail for free and completely ad-free. Just enter the link and I will do the rest.
+    </span>	
+    <span className="promotion">
+    	Also checkout <a href="https://youtubenamegenerator.ml"> Youtube Name Generator</a> and <a href="https://tiktoknamegenerator.ml"> Tiktok Name Generator</a>
+    </span>	
     </div>
   );
 }
