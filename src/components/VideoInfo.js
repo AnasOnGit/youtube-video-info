@@ -14,11 +14,6 @@ const VideoInfo = ({title,src,description,tags,icon,subscriber,channelName,chann
 			    		<span key={index}>{tag}, </span>
 			    	))}
 			    </div>
-			    <div className="fancy-tags mt-3">
-			    	{tags.map((tag,index) =>(
-			    		<span key={index}>{tag}</span>
-			    	))}
-			    </div>
 			   </div>
 		    <div className="form-group mt-3">
 			    <label htmlFor="exampleFormControlTextarea1">Description</label>

@@ -204,7 +204,7 @@ function App() {
       {loading?showLoading:""}
      {title === "" ? "":<VideoInfo title={title} src={src} description={description} tags={tags} icon={icon} subscriber={subscriber} channelName={channelName} channelId={channelId} />}
     <span className="box-container">
-    	Hey, I'm YVI I can extract Youtube video title, tags, description, and thumbnail for free and completely ad-free. Just enter the link and I will do the rest.
+    	Hey, I'm YVI I can extract title, tags, description, and thumbnail from any YouTube Video for free and without any annoying ad. Just enter the link and I will do the rest.
     </span>	
     <span className="promotion">
     	Also checkout <a href="https://youtubenamegenerator.ml"> Youtube Name Generator</a> and <a href="https://tiktoknamegenerator.ml"> Tiktok Name Generator</a>
