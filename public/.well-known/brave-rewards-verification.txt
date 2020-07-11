@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: youtubevideoinfo.ml
+Token: 10153df91a79c171f04033b2cf43097d7df0b9f68f08ec977ab28f3f48d01358
