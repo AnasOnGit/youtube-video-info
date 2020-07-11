@@ -113,3 +113,21 @@ code {
 {
 	padding-bottom: 54px;
 }
+
+/*iframe{
+    width: 100%;
+    height: 315px;
+}*/
+.video-iframe{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+.video-iframe iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}

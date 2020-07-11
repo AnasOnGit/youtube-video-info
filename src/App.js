@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import VideoInfo from "./components/VideoInfo";
-
+// add option to play video
 function App() {
   // define
   const api = process.env.REACT_APP_API_KEY;
@@ -20,28 +20,19 @@ function App() {
   const [channelName,setChannelName] = useState("")
   const [channelId,setChannelId] = useState("")
   const [loading,setLoading] = useState(false)
+  const [videoId,setVideoId] = useState();
   // methods
-  const checkResponse = (response) => {
-  	console.log(response)
-  	if(!response.ok)
-      	{
-      		// response.ok === 403 || 
-      		throw Error("Youtube server is not responding, Please try again later!!!")
-      	}
-      	return response;
-  }
   const handleSubmit = (e) => {
     e.preventDefault();
     // remove any waring message if their is one..
 	 setMessage({});
     setUrl(e.target.url.value);
     let urlArray = e.target.url.value.split("/");
-    // console.log(urlArray)
     if (urlArray[2] === "youtube.com" || urlArray[2] === "www.youtube.com") {
 	  // remove any waring message if their is one..
 	  setMessage({});
       const watchQuery = urlArray[3];
-      if(watchQuery == undefined)
+      if(watchQuery === undefined)
       {
       	setMessage({message:"Please enter a valid link!!!"});
       }else
@@ -50,13 +41,14 @@ function App() {
       	// remove message
       	setMessage({});
       	const videoIdArray = watchQuery.split("watch?v=");
-      	const videoId = videoIdArray[1];
+      	setVideoId(videoIdArray[1]);
       	// show loading
       	setLoading(true)
       	// remove 
       	setTitle("")
-      	getVideoInfo(videoId);
-      	
+      	// getting video Infomation
+      	getVideoInfo(videoIdArray[1]);
+
       }else{
       	setMessage({message:'Please enter a valid YouTube video "URL"!',color:"red"})
       }
@@ -64,11 +56,12 @@ function App() {
     }else if(urlArray[2] === "youtu.be"){
     	// remove any waring message if their is one..
 	    setMessage({});
-	 	const videoId =  urlArray[3];
-	 	console.log(videoId)
-	 	getVideoInfo(videoId);
+	 	setVideoId(urlArray[3]);
+	 	// getting video Infomation
+	 	getVideoInfo(urlArray[3]);
     }
      else {
+     	// showing error message, if there is any problem with url
       setMessage({message:'Please enter a valid "YouTube" video link!',color:"red"})
       setTitle("");    }
   };
@@ -77,7 +70,6 @@ function App() {
     fetch(
       `https://www.googleapis.com/youtube/v3/videos?key=${api}&part=snippet&id=${videoId}`
     )
-      // .then(checkResponse)
       .then((response) => {
       	if(!response.ok)
       	{
@@ -85,11 +77,8 @@ function App() {
       		throw Error("Youtube server is not responding, Please try again later!!!")
       	}
       	return response.json();
-  // }
-      	// response.json()
       })
       .then((data) => {
-      	// console.log(data)
         const videoInfo = data.items[0].snippet;
         setTitle(videoInfo.title);
         setDescription(videoInfo.description);
@@ -98,7 +87,7 @@ function App() {
         setChannelId(videoInfo.channelId)
         // hide loading
       	setLoading(false)
-        // getChannelInfo(videoInfo.channelId);
+        // getting channel name and icon ==== we already have channel name we are only getting icon from here        
         fetch(
       `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${videoInfo.channelId}&key=${api}`
     )
@@ -107,7 +96,6 @@ function App() {
         const channelInfo = data.items[0].snippet;
         setChannelName(channelInfo.title)
         setIcon(channelInfo.thumbnails.default.url)
-        // console.log(channelInfo)
 
       });
         getStatistics(videoInfo.channelId);
@@ -202,7 +190,9 @@ function App() {
         </button>
       </form>
       {loading?showLoading:""}
-     {title === "" ? "":<VideoInfo title={title} src={src} description={description} tags={tags} icon={icon} subscriber={subscriber} channelName={channelName} channelId={channelId} />}
+     {title === "" ? "":<VideoInfo title={title} src={src} description={description}
+      tags={tags} icon={icon} subscriber={subscriber} channelName={channelName}
+       channelId={channelId} videoId={videoId}/>}
     <span className="box-container">
     	Hey, I'm YVI I can extract title, tags, description, and thumbnail from any YouTube Video for free and without any annoying ad. Just enter the link and I will do the rest.
     </span>	
