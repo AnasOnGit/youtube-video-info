@@ -5,7 +5,7 @@ const ChannelInfo = ({icon,subscriber,channelName,channelId}) =>{
 		<div className="channel-info mt-5 mb-5">
 		   <a href={`https://youtube.com/channel/${channelId}`} target="_blank">
 		   	 	<img src={icon} className="img-fluid" alt={channelName} />
-			    <span className="center">
+			    <span className="center name-sub">
 			    	<h3>{channelName}</h3>
 			    	<span>{subscriber} subscribers</span>
 			    </span>
