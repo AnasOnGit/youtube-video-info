@@ -292,14 +292,14 @@ const findVideoInfo = (link = "") => {
         />
       )}
       <span className="box-container">
-        Hey, I'm Ashisutanto I can extract title, tags, description, and
+        Hey, I'm AI I can extract title, tags, description, and
         thumbnail from any YouTube Video for free and without any annoying ad.
         Just enter the link and I will do the rest.
       </span>
       <span className="promotion">
         Also checkout{" "}
-        <a href="https://youtubenamegenerator.ml"> Youtube Name Generator</a>{" "}
-        and <a href="https://tiktoknamegenerator.ml"> Tiktok Name Generator</a>
+        <a href="https://youtubenamegenerator.netlify.app/"> Youtube Name Generator</a>{" "}
+        and <a href="https://tiktoknamegenerator.netlify.app/"> Tiktok Name Generator</a>
       </span>
     </div>
   );
